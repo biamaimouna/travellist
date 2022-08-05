@@ -18,23 +18,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// // protected endpoints
-// $router->group(['middleware' => 'auth'], function () {
-//     $router->get('/protected-endpoint', 'SecretController@index');
-//     // more endpoints ...
-// });
+Route::middleware([EnsureTokenIsValid::class])->group(function () {
 
-// // List all posts
-// Route::get('posts', 'PostController@index');
+    Route::get('/public', function () {  //public route
+        //
+    })->withoutMiddleware([EnsureTokenIsValid::class]);
 
-// // List a single post
-// Route::get('post/{id}', 'PostController@show');
+    Route::get('/private1', function () {
+        //
+    });
 
-// // Create a new post
-// Route::post('post', 'PostController@store');
-
-// // Update a post
-// Route::put('post', 'PostController@store');
-
-// // Delete a post
-// Route::delete('post/{id}', 'PostController@destroy');
+    Route::get('/private2', function () {
+        //
+    });
+});
