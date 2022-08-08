@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,17 +19,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware([EnsureTokenIsValid::class])->group(function () {
+// Public endpoints
+Route::get('api/users', 'App\Http\Controllers\API\UserController@index');
 
-    Route::get('/public', function () {  //public route
-        //
-    })->withoutMiddleware([EnsureTokenIsValid::class]);
-
-    Route::get('/private1', function () {
-        //
-    });
-
-    Route::get('/private2', function () {
-        //
-    });
+Route::get('/UnAuthorized', function () {
+    return '403: UnAuthorized!' ;   
 });
+

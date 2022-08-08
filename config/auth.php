@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',   # <-- For sure, i`m building an API
+        'guard' => 'api',   
         'passwords' => 'users',
     ],
 
@@ -38,6 +38,11 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',   # <-- Set the API guard driver to "keycloak"
+            'provider' => 'users',
+        ],
+
+        'api' => [
+            'driver' => 'keycloak', # <-- Set the API guard driver to "keycloak"
             'provider' => 'users',
         ],
     ],
